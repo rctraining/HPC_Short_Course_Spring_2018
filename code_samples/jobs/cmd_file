@@ -1,0 +1,4 @@
+python progs/hello_World.py 1;
+python progs/hello_World.py 2;
+python progs/hello_World.py 3;
+python progs/hello_World.py 4;
