@@ -1,0 +1,3 @@
+CC = icc
+OPT_FLAGS = -O2
+INCLUDE_FLAGS = -I .

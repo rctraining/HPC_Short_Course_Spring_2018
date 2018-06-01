@@ -1,0 +1,18 @@
+#Notes for changing LD_LIBRARY_PATH
+
+1)  DO THIS ONCE, before adding pkg1/lib or pkg2/lib to your LD_LIBRARY_PATH
+export LD_SAVE=$LD_LIBRARY_PATH
+export LIB1=$PWD/pkg1/lib
+export LIB2=$PWD/pkg2/lib
+
+2)  Now, when experimenting with the path, use either:
+	LD_LIBRARY_PATH=$LIB1:$LD_SAVE
+	or
+	LD_LIBRARY_PATH=$LIB2:$LD_SAVE
+
+Note (1):  $PWD always contains name of the current working directory
+
+Note (2):  The syntax LD_LIBRARY_PATH=$PKG1:$LD_LIBRARY_PATH etc. will 
+also work, but your path will become very long very quickly as you
+switch back and forth between having package 1 or 2 at the top of
+your LD_LIBRARY_PATH.

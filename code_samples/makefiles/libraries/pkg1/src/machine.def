@@ -1,0 +1,12 @@
+CC       = icc
+CFLAGS   = -O1 -I .     
+
+#GNU archiver program "ar".  
+# The "c" option tells ar to create the library if it  does
+# not already exist.
+#
+# The "r' option tells ar to replace any libraries already
+# found to exist in the archive.  
+
+ARCHIVER = ar rc        #GNU archiver command
+

@@ -1,0 +1,17 @@
+# In this Makefile, we define three targets:
+# 1) .PHONY (used to list things that aren't filenames)
+# 2) hello.exe (the program we want to compile)
+# 3) clean (name of our cleanup recipe )
+
+#clean refers to a recipe, not a file.  Include it in .PHONY
+.PHONY: clean
+
+# hello.exe requires hello.c and hellofunc.c to compile
+hello.exe: hello.c hellofunc.c
+	@echo "Compiling hello.exe."
+	icc -I . hello.c hellofunc.c -o hello.exe
+
+# When make clean is run, remove compiled files
+clean:
+	rm -f *.o
+	rm -f hello.exe

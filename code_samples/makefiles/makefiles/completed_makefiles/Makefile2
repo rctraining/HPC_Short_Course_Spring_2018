@@ -1,0 +1,25 @@
+# In this Makefile, we define five variables:
+# 1) CC            : name of compilation command
+# 2) OPT_FLAGS     : optmization flags (e.g., -O2)
+# 3) INCLUDE_FLAGS : flags used to indicate include directories
+# 4) CFLAGS        : flags passed to compiler in hello.exe rule
+# 5) PROG          : name of the program we wish to compile
+ 
+# We also use the $@ and $^ variables in the rule for hello.exe
+# to refer to hello.exe and {hello.c hellofunc.c} respectively.
+
+CC = icc
+OPT_FLAGS = -O2
+INCLUDE_FLAGS = -I .
+CFLAGS = $(OPT_FLAGS) $(INCLUDE_FLAGS)
+PROG = hello.exe
+
+.PHONY: clean
+
+$(PROG): hello.c hellofunc.c
+	@echo "Compiling " $(PROG) "."
+	$(CC) $(CFLAGS) $^ -o $@
+
+clean:
+	rm -f *.o
+	rm -f $(PROG)

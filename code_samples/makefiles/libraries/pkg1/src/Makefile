@@ -1,0 +1,40 @@
+include machine.def
+SHARED   = libshared.so #Name of shared library
+STATIC   = libstatic.a  #Name of static library
+
+
+FUNCS = func1.o func2.o func3.o
+INC   = funcs.h
+SRC   = func1.c func2.c func3.c
+
+.PHONY: all clean
+
+#In this example, Make checks to see if the libraries exist, and if the
+#source code has changed.  If so, it recompiles the libraries before
+#executing the copy commands
+all: $(SHARED) $(STATIC) $(INC) $(SRC)
+	cp $(SHARED) ../lib/.
+	cp $(STATIC) ../lib/.
+	cp $(INC) ../include/.
+
+# When building source for shared libraries, we must use the -fPIC flag.
+# This tells the compiler to generate position indepedent code.
+#
+# When also need to use the -shared flag when linking the object 
+# files together to build the shared library.
+$(SHARED): $(INCS) $(SRC)
+
+# We do not need to use -fPIC for static libraries.
+# Instead of icc/gcc, we use the archiver (typically ar) to link our
+# compiled object files together.
+$(STATIC): $(INCS) $(SRC)
+
+clean:
+	rm -f *.o
+	rm -f *.so
+	rm -f *.a
+
+distclean:
+	rm -f ../lib/$(SHARED)
+	rm -f ../lib/$(STATIC)
+	rm -f ../include/$(INC)
